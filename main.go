@@ -34,6 +34,11 @@ func grinHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "😀")
 }
 
+// nicknameHandler responds with my class nickname.
+func nicknameHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "alert-moose")
+}
+
 func main() {
 	// Say that when we receive a request for the '/' (or "root") URL
 	// we want the function `indexHandler` to handle it.
@@ -43,6 +48,9 @@ func main() {
     // the `grinHandler` function to handle it.
 	http.HandleFunc("/grin", grinHandler)
 	http.HandleFunc("/grinning", grinHandler)
+
+	// When we receive a request at '/nickname', respond with my nickname.
+	http.HandleFunc("/nickname", nicknameHandler)
 
 	// Start listening for HTTP requests.
 	http.ListenAndServe(":"+getEnv("PORT", "8080"), nil)
